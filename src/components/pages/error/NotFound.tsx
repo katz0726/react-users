@@ -1,6 +1,6 @@
 import { memo, FC } from 'react'
 
-export const Page404: FC = memo(() => {
+export const NotFound: FC = memo(() => {
   return (
     <div>404ページです</div>
   )

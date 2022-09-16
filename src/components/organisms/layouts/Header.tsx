@@ -36,9 +36,9 @@ export const Header: FC = memo(() => {
         </Flex>
         <Flex align="center" fontSize="sm" flexGrow={2} display={{ base: "none", md: "flex" }}>
           <Box pr={4}>
-            <Link>ユーザ一覧</Link>
+            <Link href="/home/user_management">ユーザ一覧</Link>
           </Box>
-          <Link>設定</Link>
+          <Link href="/home/setting">設定</Link>
         </Flex>
         <IconButton
           aria-label="メニューボタン"
