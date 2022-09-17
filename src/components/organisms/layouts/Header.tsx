@@ -1,4 +1,4 @@
-import { memo, FC } from 'react';
+import { memo, FC, useCallback } from 'react';
 import {
   Flex,
   Heading,
@@ -8,9 +8,17 @@ import {
 } from '@chakra-ui/react';
 import { MenuIconButton } from '../../atoms/button/MenuIconButton';
 import { MenuDrawer } from '../../molecules/MenuDrawer';
+import { useNavigate } from 'react-router-dom';
+
 
 export const Header: FC = memo(() => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const navigate = useNavigate();
+
+  const onClickHome = navigate("/home");
+  const onClickUserManagement = navigate("/home/user_management");
+  const onClickSettings = navigate("/home/setting");
+
   return (
     <>
       <Flex
@@ -25,15 +33,16 @@ export const Header: FC = memo(() => {
           align="center"
           as="a"
           mr={8}
-          _hover={{cursor: "pointer" }}
+          _hover={{ cursor: "pointer" }}
+          onClick={ () => onClickHome }
         >
           <Heading as="h1" fontSize={{ base: "md", md: "lg" }}>ユーザ管理アプリ</Heading>
         </Flex>
         <Flex align="center" fontSize="sm" flexGrow={2} display={{ base: "none", md: "flex" }}>
           <Box pr={4}>
-            <Link href="/home/user_management">ユーザ一覧</Link>
+            <Link onClick={ () => onClickUserManagement }>ユーザ一覧</Link>
           </Box>
-          <Link href="/home/setting">設定</Link>
+          <Link onClick={ () => onClickSettings }>設定</Link>
         </Flex>
         <MenuIconButton onOpen={onOpen} />
       </Flex>
