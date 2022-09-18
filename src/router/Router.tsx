@@ -6,7 +6,7 @@ import { NotFound } from '../components/pages/error/NotFound';
 import { Setting } from '../components/pages/Setting';
 import { UserManagement } from '../components/pages/UserManagement';
 import { HeaderLayout } from '../components/templates/HeaderLayout';
-import { LoginUserProvider } from '../hooks/providers/LoginUserProvider';
+import { LoginUserProvider } from '../providers/LoginUserProvider';
 
 export const Router: FC = memo(() => {
   return (
