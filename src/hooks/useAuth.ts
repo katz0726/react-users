@@ -7,7 +7,7 @@ import { useMessage } from "./useMessage";
 export const useAuth = () => {
   const navigate = useNavigate();
   const { showMessage } = useMessage();
-  const [loading, setLoading] = useState(false);
+  const [ loading, setLoading ] = useState(false);
 
   const login = useCallback((id: string) => {
     setLoading(true);
