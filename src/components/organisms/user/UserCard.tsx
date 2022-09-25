@@ -1,16 +1,16 @@
-import { Box, Image, Stack, Text } from '@chakra-ui/react';
-import { FC, memo } from 'react'
+import { memo, VFC } from "react";
+import { Box, Image, Stack, Text } from "@chakra-ui/react";
 
 type Props = {
   id: number;
   imageUrl: string;
   userName: string;
-  userFullName: string;
+  fullName: string;
   onClick: (id: number) => void;
 };
 
-export const UserCard: FC<Props> = memo((props) => {
-  const { id, imageUrl, userName, userFullName, onClick } = props;
+export const UserCard: VFC<Props> = memo(props => {
+  const { id, imageUrl, userName, fullName, onClick } = props;
 
   return (
     <Box
@@ -25,14 +25,18 @@ export const UserCard: FC<Props> = memo((props) => {
     >
       <Stack textAlign="center">
         <Image
-          boxSize="160px"
           borderRadius="full"
-          src={ imageUrl }
-          alt="プロフィールアイコン"
+          boxSize="160px"
+          src={imageUrl}
+          alt={userName}
           m="auto"
         />
-        <Text fontSize="lg" fontWeight="bold">{ userName }</Text>
-        <Text fontSize="sm" color="gray">{ userFullName }</Text>
+        <Text fontSize="lg" fontWeight="bold">
+          {userName}
+        </Text>
+        <Text fontSize="sm" color="gray">
+          {fullName}
+        </Text>
       </Stack>
     </Box>
   );

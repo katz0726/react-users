@@ -1,7 +1,7 @@
 import { Box, Divider, Flex, Heading, Input, Stack } from '@chakra-ui/react'
 import { memo, FC, useState, ChangeEvent } from 'react'
 import { app_name } from '../../App';
-import { PrimaryButtton } from '../atoms/button/PrimaryButtton';
+import { PrimaryButton } from '../atoms/button/PrimaryButton';
 import { useAuth } from '../../hooks/useAuth';
 
 export const Login: FC = memo(() => {
@@ -34,13 +34,13 @@ export const Login: FC = memo(() => {
             onChange={onChangeUserId}
             placeholder="ユーザID"
           />
-          <PrimaryButtton
+          <PrimaryButton
             disabled={userId === ""}
             loading={loading}
             onClick={onClickLogin}
           >
             ログイン
-          </PrimaryButtton>
+          </PrimaryButton>
         </Stack>
       </Box>
     </Flex>

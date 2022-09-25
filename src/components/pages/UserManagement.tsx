@@ -1,46 +1,60 @@
+import { FC, memo, useCallback, useEffect } from "react";
+import {
+  Center,
+  Spinner,
+  useDisclosure,
+  Wrap,
+  WrapItem
+} from "@chakra-ui/react";
+import { useAllUsers } from "../../hooks/useAllUsers";
+import { useLoginUser } from "../../hooks/useLoginUser";
+import { UserCard } from "../organisms/user/UserCard";
+import { useSelectUser } from "../../hooks/useSelectUser";
+import { UserDetailModal } from "../organisms/user/UserDetailModal";
 
-/* eslint-disable react-hooks/exhaustive-deps */
-
-import { Center, Spinner, useDisclosure, Wrap, WrapItem } from '@chakra-ui/react'
-import { memo, FC, useEffect, useCallback } from 'react'
-import { useAllUsers } from '../../hooks/useAllUsers';
-import { useSelectUsers } from '../../hooks/useSelectUser';
-import { UserCard } from '../organisms/user/UserCard';
-import { UserDetailModal } from '../organisms/user/UserDetailModal';
 
 export const UserManagement: FC = memo(() => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { getUsers, loading, users } = useAllUsers();
-  const { onSelectUser, selectedUser} = useSelectUsers();
+  const { onSelectUser, selectedUser } = useSelectUser();
+  const { loginUser } = useLoginUser();
 
   useEffect(() => getUsers(), [getUsers]);
 
-  const onClickUser = useCallback((id: number) => {
-    onSelectUser({id, users, onOpen})
-  }, [users, onSelectUser, onOpen]);
+  const onClickUser = useCallback(
+    (id: number) => {
+      onSelectUser({ id, users, onOpen });
+    },
+    [users, onSelectUser, onOpen]
+  );
 
   return (
     <>
       {loading ? (
         <Center h="100vh">
-          <Spinner />
+          <Spinner color="teal.200" />
         </Center>
       ) : (
         <Wrap p={{ base: 4, md: 10 }}>
-          {users.map(user => (
-            <WrapItem key={user.id} mx="auto">
+          {users.map(obj => (
+            <WrapItem key={obj.id} mx="auto">
               <UserCard
-                id={user.id}
-                imageUrl={'https://source.unsplash.com/random'}
-                userName={user.username}
-                userFullName={user.name}
+                id={obj.id}
+                imageUrl="https://source.unsplash.com/random"
+                userName={obj.username}
+                fullName={obj.name}
                 onClick={onClickUser}
               />
             </WrapItem>
           ))}
         </Wrap>
       )}
-      <UserDetailModal user={selectedUser} isOpen={isOpen} onClose={onClose} />
+      <UserDetailModal
+        isOpen={isOpen}
+        isAdmin={loginUser?.isAdmin}
+        onClose={onClose}
+        user={selectedUser}
+      />
     </>
-  )
+  );
 });
